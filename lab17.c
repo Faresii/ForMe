@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 
-
+#define LEN  50
 
 //объявление переменных
 char str[] = "";
@@ -15,13 +15,11 @@ int max = 0;
 int main()
 {
 
-int LEN = 50;
+
 
     char str[LEN] = "";
-    char *pFirst = str;
-    char *pLast = str;               
-    int  len = 1;
-    int max_len = 0;  
+    char *pFirst, *pLast = str;               
+    int  len, max_len = 1;  
 
      
 
@@ -29,15 +27,6 @@ int LEN = 50;
 
     printf( "Введите строку : \n " );
     fgets( str, LEN, stdin);
-
-    int size_str = strlen(str);  
-    printf( "%d \n ", size_str );
-    while ( size_str > LEN){
-    printf( "Введите строку : \n " );
-    fgets( str, LEN, stdin);
-        if (size_str < LEN) break;
-        else printf( "Некорректный ввод \n " );
-    }
 
     while( *pLast )
     {
@@ -48,13 +37,15 @@ int LEN = 50;
         while( *pLast != '\0' && *pLast != ' ' )
         {
             pLast++;
-            
+            if (*pLast == '\n') *pLast = '\0';
         }
  
         len = pLast - pFirst;
-        if( len > max_len )    max_len = len;
+        if( len > max_len )    max_len = len ;
+        
         
     } 
+    
     printf( "Максимальная длина слова : %d\n", max_len );
 
 system("pause"); //пауза для фиксации консоли
