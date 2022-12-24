@@ -5,6 +5,9 @@
 #include <math.h>
 #define F(a) 5-a
 
+#define W 1
+#define MAC 1
+
 //Главная программа
 int main()
 {
@@ -15,22 +18,20 @@ int x = 0;
 int y = 0;
 
 //Ввод данных с клавиатуры
-while(1){
-printf("Введите 1, чтобы вычислить функцию\nВведите 2, чтобы выйти из программы\n");
-printf("Ввод: ");
-scanf("%d", &i);
 
-if (i == 1)
-{
 printf("Введите целочисленное значение x :");
 scanf("%d", &x);
+
+#if (W == MAC)
 y = -5 * (F(x))*(F(x))*(F(x))*(F(x)) + 5 * (F(x))*(F(x)) + 5;
+
+
 printf("%d\n", y);
 
-}
-if (i == 2)  break;
 
-}
+#endif
+
+
 system("pause");//пауза для фиксации консоли
 return 0;
 }
