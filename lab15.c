@@ -58,7 +58,7 @@ do
 {
 
 
-printf("Input 1 for reading, 2 for writing, 3 for delete all data in a file, 4 for delete file, 5 for exit: ");
+printf("Input 1 for reading,2 Телевизоры Sony < 15 дюймов, 3 for writing, 4 for delete all data in a file, 5 for delete file, 5 for exit: ");
 scanf("%d", &choice);
 
 if (choice == 1) // чтение данных из файла
@@ -71,10 +71,6 @@ printf("File is empty.\n");
 }
 else // выводим в консоль данные из файла
 {
-
-
-    
-    printf("Кол-во нужных телевизоров: %d \n", counter);
     
 printf("Data from file: ");
 for (int i = 0; i < counter; i++) // считываем все записи
@@ -88,7 +84,38 @@ printf("\n");
 
 }
 }
-else if (choice == 2) // запись новых данных в файл
+
+if (choice == 2) // чтение данных из файла
+{
+rewind(bfile); // перемещаемся в начало файла
+fread(&counter,sizeof(counter),1,bfile); // узнаем сколько записей находится внутри файла
+if (counter == 0) // если 0, то в файле данных нет
+{
+printf("File is empty.\n");
+}
+else // выводим в консоль данные из файла
+{
+
+    
+printf("Телевизоры Sony < 15 дюймов: ");
+for (int i = 0; i < counter; i++) // считываем все записи
+{
+   
+fread(&TV.name, 20*sizeof(char), 1, bfile);
+fread(&TV.inch, sizeof(int), 1, bfile);
+fread(&TV.cost, sizeof(int), 1, bfile);
+if ((strcmp(TV.name, "Sony") == 0) && TV.inch < 15){
+printf("%s %d %d ", TV.name, TV.inch, TV.cost);
+}
+
+printf("\n");
+}
+}
+printf("Кол-во нужных телевизоров: %d \n", counter);
+}
+
+
+else if (choice == 3) // запись новых данных в файл
 {
 
 printf("Введите данные о телевизоре: ");
@@ -97,8 +124,6 @@ for (int i = 0; i < 20; i++)
     TV.name[i] = '\0';
 scanf("%s %d %d", &TV.name, &TV.inch, &TV.cost); // с клавиатуры вводим новые данные, которые хотим поместить в файл
 fflush(stdin); // очищаем входной поток
-
-if ((strcmp(TV.name, "Sony") == 0) && TV.inch < 15) {
 
 rewind(bfile); //перемещаемся в начало файла
 fread(&counter, sizeof(counter), 1, bfile); //узнаем кол-во записей в файле
@@ -109,11 +134,11 @@ fwrite(&TV.cost, sizeof(int), 1, bfile); // записываем новые да
 counter++; // увеличиваем число записей
 rewind(bfile); //перемещаемся в наnumberчало файла
 fwrite(&counter, sizeof(counter), 1, bfile); // обновляем поле, хранящее в себе кол-во записей в файле
-}
+
 
 }
 
-else if (choice == 3) // удаление данных из файла
+else if (choice == 4) // удаление данных из файла
 {
 do
 {
@@ -137,7 +162,7 @@ else // пользователь не захотел удалять данные
 printf("Good choice!\n");
 }
 }
-else if (choice == 4) // удаление файла
+else if (choice == 5) // удаление файла
 {
 do
 {
@@ -174,7 +199,7 @@ else // пользователь не захотел удалять файл
 printf("Good choice!\n");
 }
 }
-else if (choice == 5) // выход из программы
+else if (choice == 6) // выход из программы
 {
 break;
 }
