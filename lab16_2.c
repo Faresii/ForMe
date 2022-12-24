@@ -5,7 +5,10 @@
 #include <math.h>
 #define F(a) 5-a
 
-void schet(int);
+#define MAC 1
+#define FUNC 2
+#define W 1
+
 
 //Главная программа
 int main()
@@ -18,37 +21,34 @@ int y = 0;
 int j = 0;
 
 //Ввод данных с клавиатуры
-while(1){
-printf("Введите 1, чтобы вычислить функцию\nВведите 2, чтобы выйти из программы\n");
-printf("Ввод: ");
-scanf("%d", &i);
-if (i == 1)
-{
+
+
 printf("Введите целочисленное значение x: ");
 scanf("%d", &x);
-printf("Введите 3, чтобы виспользовать макрофункцию\nВведите 4, чтобы использовать обычную функцию\n");
-printf("Ввод: ");
-scanf("%d", &j);
 
-if (j == 3)
-{
+
+#if(W == MAC)
 y = -5 * (F(x))*(F(x))*(F(x))*(F(x)) + 5 * (F(x))*(F(x)) + 5;
-printf("%d\n", y);
-}
+printf("Ответ : %d\n", y);
 
-else
+
+#else if (W == FUNC)
 {
-schet(x);
+printf("%d\n", sch(x));
 }
-}
-if (i == 2) break;
+#endif
+
+
+
+system("pause");
+return 0;
 
 }
-}
-void schet(int b)
+
+void sch(int x)
 {
 int k = 0;
-k = -5 * (5 - b) * (5 - b) * (5 - b) * (5 - b) + 5 * (b - 5) * (b - 5) + 5;
+k = -5 * (5 - x) * (5 - x) * (5 - x) * (5 - x) + 5 * (x - 5) * (x - 5) + 5;
 printf("Ответ: %d\n", k);
 
 system("pause");//пауза для фиксации консоли
